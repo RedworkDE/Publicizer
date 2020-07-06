@@ -1,13 +1,13 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <ItemDefinitionGroup>
-    <PublicizeAssemblies>
+    <PublicizeAssembly>
       <Visible>false</Visible>
       <Internal></Internal>
       <Private></Private>
       <Readonly></Readonly>
       <EventBackingField></EventBackingField>
-    </PublicizeAssemblies>
+    </PublicizeAssembly>
   </ItemDefinitionGroup>
 
   <PropertyGroup>
@@ -27,7 +27,7 @@
   <Target Name="RedworkDEPublicizerTask" AfterTargets="AfterResolveReferences">
     <PublicizeTask
         References="@(ReferencePath)"
-        PublicizeAssemblies="@(PublicizeAssemblies)"
+        PublicizeAssemblies="@(PublicizeAssembly)"
         IntermediatePath="$(IntermediateOutputPath)RedworkDE.Publicizer\"
         PublicizeAll="$(PublicizeAll)"
         DefaultPublicizeInternal="$(DefaultPublicizeInternal)"

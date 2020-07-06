@@ -6,6 +6,8 @@
     <authors>RedworkDE</authors>
     <owners>RedworkDE</owners>
     <projectUrl>https://github.com/RedworkDE/Publicizer</projectUrl>
+    <repository type="git" url="https://github.com/RedworkDE/Publicizer"/>
+    <license type="expression">MIT</license>
     <description>Enables using normally inaccessible members in referenced assemblies</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes></releaseNotes>
