@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Configurations>Standalone;NuGet</Configurations>
+    <OutputType Condition="'$(Configuration)'=='Standalone'">WinExe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dnlib" Version="3.3.2" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.9.20" Condition="'$(Configuration)'=='NuGet'" />
+  </ItemGroup>
+
+  <Target Name="CopyRefsTarget" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <CopyRefs Include="@(ReferencePath)" Condition=" '%(Filename)' == 'dnlib' " />
+    </ItemGroup>
+    <Copy SourceFiles="@(CopyRefs)" DestinationFolder="$(OutDir)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedworkDE.Publicizer.Tasks", "RedworkDE.Publicizer.Tasks\RedworkDE.Publicizer.Tasks.csproj", "{14313492-5ABE-4452-8BC6-A34930852784}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3411320-CEF3-4AA4-8A2B-681E10233408}"
+	ProjectSection(SolutionItems) = preProject
+		RedworkDE.Publicizer.nuspec = RedworkDE.Publicizer.nuspec
+		build\RedworkDE.Publicizer.targets = build\RedworkDE.Publicizer.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		NuGet|Any CPU = NuGet|Any CPU
+		Standalone|Any CPU = Standalone|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14313492-5ABE-4452-8BC6-A34930852784}.NuGet|Any CPU.ActiveCfg = NuGet|Any CPU
+		{14313492-5ABE-4452-8BC6-A34930852784}.NuGet|Any CPU.Build.0 = NuGet|Any CPU
+		{14313492-5ABE-4452-8BC6-A34930852784}.Standalone|Any CPU.ActiveCfg = Standalone|Any CPU
+		{14313492-5ABE-4452-8BC6-A34930852784}.Standalone|Any CPU.Build.0 = Standalone|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2AD7C22D-4072-43F2-A379-AB97260D9668}
+	EndGlobalSection
+EndGlobal

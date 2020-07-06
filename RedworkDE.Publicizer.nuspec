@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata minClientVersion="4.0">
+    <id>RedworkDE.Publicizer</id>
+    <version>0.1.0</version>
+    <authors>RedworkDE</authors>
+    <owners>RedworkDE</owners>
+    <projectUrl>https://github.com/RedworkDE/Publicizer</projectUrl>
+    <description>Enables using normally inaccessible members in referenced assemblies</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="RedworkDE.Publicizer.Tasks\bin\NuGet\**\*.dll" target="tools" />
+    <file src="RedworkDE.Publicizer.Tasks\bin\NuGet\**\*.deps.json" target="tools" />
+    <file src="build\**" target="build" />
+  </files>
+</package>

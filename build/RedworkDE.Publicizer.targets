@@ -1,0 +1,50 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemDefinitionGroup>
+    <PublicizeAssemblies>
+      <Visible>false</Visible>
+      <Internal></Internal>
+      <Private></Private>
+      <Readonly></Readonly>
+      <EventBackingField></EventBackingField>
+    </PublicizeAssemblies>
+  </ItemDefinitionGroup>
+
+  <PropertyGroup>
+    <_RedworkDE_Publicizer_TFM Condition="'$(MSBuildRuntimeType)' == 'Core'">netstandard2.0</_RedworkDE_Publicizer_TFM>
+    <_RedworkDE_Publicizer_TFM Condition="'$(MSBuildRuntimeType)' != 'Core'">net46</_RedworkDE_Publicizer_TFM>
+    <_RedworkDE_Publicizer_TaskAssembly>$(MSBuildThisFileDirectory)..\tools\$(_RedworkDE_Publicizer_TFM)\RedworkDE.Publicizer.Tasks.dll</_RedworkDE_Publicizer_TaskAssembly>
+
+    <PublicizeAll Condition="'$(PublicizeAll)'==''">False</PublicizeAll>
+    <DefaultPublicizeInternal Condition="'$(DefaultPublicizeInternal)'==''">True</DefaultPublicizeInternal>
+    <DefaultPublicizePrivate Condition="'$(DefaultPublicizePrivate)'==''">False</DefaultPublicizePrivate>
+    <DefaultPublicizeReadonly Condition="'$(DefaultPublicizeReadonly)'==''">False</DefaultPublicizeReadonly>
+    <DefaultPublicizeEventBackingField Condition="'$(DefaultPublicizeEventBackingField)'==''">True</DefaultPublicizeEventBackingField>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(_RedworkDE_Publicizer_TaskAssembly)" TaskName="RedworkDE.Publicizer.Tasks.PublicizeTask" />
+
+  <Target Name="RedworkDEPublicizerTask" AfterTargets="AfterResolveReferences">
+    <PublicizeTask
+        References="@(ReferencePath)"
+        PublicizeAssemblies="@(PublicizeAssemblies)"
+        IntermediatePath="$(IntermediateOutputPath)RedworkDE.Publicizer\"
+        PublicizeAll="$(PublicizeAll)"
+        DefaultPublicizeInternal="$(DefaultPublicizeInternal)"
+        DefaultPublicizePrivate="$(DefaultPublicizePrivate)"
+        DefaultPublicizeReadonly="$(DefaultPublicizeReadonly)"
+        DefaultPublicizeEventBackingField="$(DefaultPublicizeEventBackingField)"
+      >
+      <Output ItemName="_RedworkDE_Publicizer_AddedReferences" TaskParameter="AddedReferences" />
+      <Output ItemName="_RedworkDE_Publicizer_RemovedReferences" TaskParameter="RemovedReferences" />
+      <Output ItemName="Compile" TaskParameter="GeneratedCodeFiles" />
+    </PublicizeTask>
+    <ItemGroup>
+      <_ResolveAssemblyReferenceResolvedFiles Remove="@(_RedworkDE_Publicizer_RemovedReferences)" />
+      <_ResolveAssemblyReferenceResolvedFiles Include="@(_RedworkDE_Publicizer_AddedReferences)" />
+      <ReferencePath Remove="@(_RedworkDE_Publicizer_RemovedReferences)" />
+      <ReferencePath Include="@(_RedworkDE_Publicizer_AddedReferences)" />
+    </ItemGroup>
+  </Target>
+
+</Project>
