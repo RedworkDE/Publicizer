@@ -5,6 +5,7 @@
     <LangVersion>latest</LangVersion>
     <Configurations>Standalone;NuGet</Configurations>
     <OutputType Condition="'$(Configuration)'=='Standalone'">WinExe</OutputType>
+    <Version>0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

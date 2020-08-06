@@ -116,7 +116,7 @@ namespace RedworkDE.Publicizer.Tasks
 
 		private static bool GetProperty(ITaskItem item, string name, bool defaultValue)
 		{
-			return bool.TryParse(item.GetMetadata(name), out var value) ? value : defaultValue;
+			return item is {} && bool.TryParse(item.GetMetadata(name), out var value) ? value : defaultValue;
 		}
 
 
