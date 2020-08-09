@@ -73,9 +73,6 @@ namespace RedworkDE.Publicizer.Tasks
 				{
 					using var md = ModuleDefMD.Load(File.ReadAllBytes(reference.ItemSpec));
 					var mdName = md.Assembly.Name.String;
-					additionalDefines.Append(";");
-					additionalDefines.Append("PUBLICIZER_");
-					additionalDefines.Append(Regex.Replace(mdName.ToUpperInvariant(), "[^A-Za-z0-9]+", "_").Trim('_'));
 					if (!publicize.TryGetValue(mdName, out var item) && !PublicizeAll)
 					{
 						Log.LogMessage(MessageImportance.Normal, "Publicize: not processing {0} / {1}", mdName, reference);
@@ -96,6 +93,10 @@ namespace RedworkDE.Publicizer.Tasks
 
 					md.Write(targetFile);
 
+					additionalDefines.Append(";");
+					additionalDefines.Append("PUBLICIZER_");
+					additionalDefines.Append(Regex.Replace(mdName.ToUpperInvariant(), "[^A-Za-z0-9]+", "_").Trim('_'));
+					
 					removed.Add(reference);
 					var newItem = new TaskItem(targetFile);
 					reference.CopyMetadataTo(newItem);
