@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using dnlib.DotNet;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -37,6 +39,9 @@ namespace RedworkDE.Publicizer.Tasks
 		[Output]
 		public ITaskItem[] GeneratedCodeFiles { get; set; }
 
+		[Output]
+		public string AdditionalDefines { get; set; }
+
 		public override bool Execute()
 		{
 			if (References is null) throw new ArgumentNullException(nameof(References));
@@ -60,12 +65,17 @@ namespace RedworkDE.Publicizer.Tasks
 			var removed = new List<ITaskItem>();
 			var assemblies = new List<string>();
 
+			var additionalDefines = new StringBuilder();
+
 			foreach (var reference in References)
 			{
 				try
 				{
-					using var md = ModuleDefMD.Load(reference.ItemSpec);
+					using var md = ModuleDefMD.Load(File.ReadAllBytes(reference.ItemSpec));
 					var mdName = md.Assembly.Name.String;
+					additionalDefines.Append(";");
+					additionalDefines.Append("PUBLICIZER_");
+					additionalDefines.Append(Regex.Replace(mdName.ToUpperInvariant(), "[^A-Za-z0-9]+", "_").Trim('_'));
 					if (!publicize.TryGetValue(mdName, out var item) && !PublicizeAll)
 					{
 						Log.LogMessage(MessageImportance.Normal, "Publicize: not processing {0} / {1}", mdName, reference);
@@ -108,6 +118,7 @@ namespace RedworkDE.Publicizer.Tasks
 			
 			AddedReferences = added.ToArray();
 			RemovedReferences = removed.ToArray();
+			AdditionalDefines = additionalDefines.ToString();
 
 			GenerateAttributes(assemblies);
 

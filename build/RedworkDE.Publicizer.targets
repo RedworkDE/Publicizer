@@ -2,7 +2,7 @@
 
   <ItemDefinitionGroup>
     <PublicizeAssembly>
-      <Visible>false</Visible>
+      <Visible>False</Visible>
       <Internal></Internal>
       <Private></Private>
       <Readonly></Readonly>
@@ -38,6 +38,7 @@
       <Output ItemName="_RedworkDE_Publicizer_AddedReferences" TaskParameter="AddedReferences" />
       <Output ItemName="_RedworkDE_Publicizer_RemovedReferences" TaskParameter="RemovedReferences" />
       <Output ItemName="Compile" TaskParameter="GeneratedCodeFiles" />
+      <Output PropertyName="_RedworkDE_Publicizer_AdditionalDefines" TaskParameter="AdditionalDefines" />
     </PublicizeTask>
     <ItemGroup>
       <_ResolveAssemblyReferenceResolvedFiles Remove="@(_RedworkDE_Publicizer_RemovedReferences)" />
@@ -45,6 +46,9 @@
       <ReferencePath Remove="@(_RedworkDE_Publicizer_RemovedReferences)" />
       <ReferencePath Include="@(_RedworkDE_Publicizer_AddedReferences)" />
     </ItemGroup>
+    <PropertyGroup>
+      <DefineConstants>$(DefineConstants)$(_RedworkDE_Publicizer_AdditionalDefines)</DefineConstants>
+    </PropertyGroup>
   </Target>
 
 </Project>
